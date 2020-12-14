@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <string.h>
+
+
+int culSum(char *str)
+{
+    int result = 0;
+    int i;
+    int count = strlen(str);
+
+    for (i = 0; i < count; i++)
+        result += str[i] - '0';
+
+    return result;
+}
+
+int main(void)
+{
+    char* alph[] = {"ling", "yi", "er", "san", "si", "wu", "liu", "qi", "ba", "jiu" };
+    char  num[100];
+    char  ch[3] = {0};
+    int   result;
+    int   i;
+
+    scanf("%s", num);
+
+    result = culSum(num);
+    for (i = 2; i >= 0 && result >= 0; result /= 10, i--)
+        ch[i] = result % 10;
+
+    for (i = 0; i < 3 && ch[i] == 0; i++)
+        ;
+    if(i >= 3)
+        printf("%s",alph[0]);
+    for (; i < 3; i++)
+        if(i == 2)
+            printf("%s",alph[ch[i]]);
+        else
+            printf("%s ",alph[ch[i]]);
+
+    printf("\n");
+
+}
